@@ -1,0 +1,31 @@
+{
+  "name": "google-forms-clone",
+  "version": "1.0.0",
+  "description": "Simple api like google forms",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "keywords": [
+    "google-forms",
+    "google-forms-clone",
+    "api",
+    "javascript",
+    "express",
+    "backend"
+  ],
+  "author": "Ameriq8",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "helmet": "^4.6.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.0.8",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.13"
+  }
+}
