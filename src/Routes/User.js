@@ -15,18 +15,22 @@ router.get("/", CheckAuth, async (req, res) => {
 router.post("/register", async (req, res) => {
   try {
     let { email, password, passwordCheck, userName } = req.body;
+    let emailRegex =
+      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    let passwordRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*d)[a-zA-Zd]{8,}$";
 
     // validate
-    if (!userName || !email || !password || !passwordCheck)
+    if (!userName || !email || !password)
       return res.status(400).json({ msg: "Not all fields have been entered." });
-    if (password.length < 8)
+    if (!emailRegex.test(email)) {
+      return res.status(400).json({ msg: "Enter a correct email" });
+    }
+    if (!passwordRegex.test(password))
       return res
         .status(400)
-        .json({ msg: "The password needs to be at least 8 characters long." });
-    if (password !== passwordCheck)
-      return res
-        .status(400)
-        .json({ msg: "Enter the same password twice for verification." });
+        .json({
+          msg: "Minimum eight characters, at least one uppercase letter, one lowercase letter and one number",
+        });
 
     const existingUser = await User.findOne({ email: email });
     if (existingUser)
@@ -41,7 +45,7 @@ router.post("/register", async (req, res) => {
       userName,
       email,
       password: passwordHash,
-      role: "user"
+      role: "user",
     });
 
     const savedUser = await newUser.save();
