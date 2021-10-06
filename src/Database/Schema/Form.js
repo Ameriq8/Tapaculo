@@ -1,9 +1,13 @@
-const {Schema, model} = require("mongoose");
+const { Schema, model } = require("mongoose");
 
-const FormSchema = new Schema({
+const formSchema = new Schema({
   userID: {
     type: String,
-    required: true
+    required: true,
+  },
+  description: {
+    type: String,
+    required: true,
   },
   status: {
     type: String,
@@ -13,11 +17,16 @@ const FormSchema = new Schema({
     type: Date,
     required: true,
   },
-  questions: {
-    type: Array,
-    required: true,
-    default: []
-  }
+  questions: [{
+    questionID: String,
+    questionRequired: Boolean,
+    questionType: String,
+  }],
+  responses: [{
+    userID: String,
+    questionID: String,
+    response: String,
+  }],
 });
 
-module.exports = model("Form", FormSchema);
+module.exports = model("Form", formSchema);
