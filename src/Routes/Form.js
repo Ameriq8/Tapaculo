@@ -3,17 +3,20 @@ const Form = require("../Database/Schema/Form");
 const CheckAuth = require("../Middleware/CheckAuth");
 const GenKey = require("../Utils/GenKey");
 
+// Get forms 
 router.get("/", CheckAuth, async (req, res) => {
   let forms = await Form.findOne({ userID: req.user });
   res.status(200).json(forms);
 });
 
-router.get("/:id", CheckAuth, async (req, res) => {
+// Get form data
+router.get("/get-form/:id", CheckAuth, async (req, res) => {
   let form = await Form.findOne({ _id: req.params.id });
   if (!form) return res.status(400).json({ msg: "No form found!!" })
   res.status(200).json(form);
 });
 
+// Create new form
 router.post("/new", CheckAuth, async (req, res) => {
   let { description, questions } = req.body;
 
@@ -52,6 +55,7 @@ router.post("/new", CheckAuth, async (req, res) => {
   });
 });
 
+// Edit form
 router.put("/:formID", CheckAuth, async (req, res) => {
   let { formID } = req.params;
   let { data } = req.body;
@@ -73,6 +77,7 @@ router.put("/:formID", CheckAuth, async (req, res) => {
     .json({ msg: "Successfully create the form and save it in the database" });
 });
 
+// Delete form
 router.delete("/:formID", CheckAuth, async (req, res) => {
   const form = await Form.findOne({ _id: req.params.formID });
   if (!form) return res.status(400).json({ msg: "No form found!!" });
@@ -82,6 +87,7 @@ router.delete("/:formID", CheckAuth, async (req, res) => {
     .json({ msg: "Successfully deleted the form from the database" });
 });
 
+// Add response
 router.post("/add-response/:formID", CheckAuth, async (req, res) => {
   let form = await Form.findOne({ _id: req.params.formID });
   if (!form) return res.status(400).json({ msg: "No form found!!" });
