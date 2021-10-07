@@ -1,32 +1,36 @@
-const { Schema, model } = require("mongoose");
+const { Schema, model } = require('mongoose')
 
 const formSchema = new Schema({
   userID: {
     type: String,
-    required: true,
+    required: true
   },
   description: {
     type: String,
-    required: true,
+    required: true
   },
   status: {
     type: String,
-    required: true,
+    required: true
   },
   createAt: {
     type: Date,
-    required: true,
+    required: true
   },
-  questions: [{
-    questionID: String,
-    questionRequired: Boolean,
-    questionType: String,
-  }],
-  responses: [{
-    userID: String,
-    questionID: String,
-    response: String,
-  }],
-});
+  questions: [
+    {
+      questionID: String,
+      questionRequired: Boolean,
+      questionType: String
+    }
+  ],
+  responses: [
+    {
+      userID: String,
+      questionID: String,
+      response: String
+    }
+  ]
+})
 
-module.exports = model("Form", formSchema);
+module.exports = model('Form', formSchema)

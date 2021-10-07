@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose')
 
 mongoose.connect(
   process.env.MONGODB_URI,
@@ -6,8 +6,8 @@ mongoose.connect(
     useNewUrlParser: true,
     useUnifiedTopology: true
   },
-  (err) => {
-    if (err) throw err;
-    console.log("Mongodb has successfully connected to server");
+  err => {
+    if (err) throw err
+    console.log('Mongodb has successfully connected to server')
   }
-);
+)
