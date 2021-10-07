@@ -5,7 +5,9 @@
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
-    "dev": "nodemon src/index.js"
+    "dev": "nodemon src/index.js",
+    "lint:fix": "eslint src --fix",
+    "prettier": "prettier --write src/**/*.js"
   },
   "keywords": [
     "google-forms",
@@ -13,7 +15,9 @@
     "api",
     "javascript",
     "express",
-    "backend"
+    "backend",
+    "mongoose",
+    "mongodb"
   ],
   "author": "Ameriq8",
   "license": "MIT",
