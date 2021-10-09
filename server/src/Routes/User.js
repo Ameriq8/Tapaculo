@@ -4,7 +4,7 @@ const user = require('../Database/Schema/User')
 const genKey = require('../Utils/GenKey')
 
 router.get('/', checkAuth, async (req, res) => {
-    const userDoc = await user.findOne({ _id: req.user })
+    const userDoc = await user.findById(req.user)
     return res.status(200).json({
         userName: userDoc.userName,
         id: userDoc._id

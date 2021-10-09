@@ -7,17 +7,17 @@ const genKey = require('../Utils/GenKey')
 
 router.post('/register', async (req, res) => {
     try {
-        let { email, password, username } = req.body
+        let { username, email, password } = req.body
         let emailRegex =
             /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
         let passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*d)[a-zA-Zd]{8,}$/
 
         // validate
         if (!username || !email || !password) return res.status(400).json({ msg: 'Not all fields have been entered.' })
-        if (!emailRegex.test(email)) {
+        if (emailRegex.test(email)) {
             return res.status(400).json({ msg: 'Enter a correct email' })
         }
-        if (!passwordRegex.test(password))
+        if (passwordRegex.test(password))
             return res.status(400).json({
                 msg: 'Minimum eight characters, at least one uppercase letter, one lowercase letter and one number'
             })
