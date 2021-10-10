@@ -6,7 +6,7 @@ const genKey = require('../Utils/GenKey')
 // Get forms
 router.get('/', checkAuth, async (req, res) => {
     let forms = await form.findOne({ userID: req.user })
-    return res.status(200).json({forms})
+    return res.status(200).json({ forms })
 })
 
 // Get form data

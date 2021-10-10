@@ -13,7 +13,7 @@ router.get('/', checkAuth, async (req, res) => {
 
 router.put('/username', checkAuth, async (req, res) => {
     let { username } = req.body
-    if (!username) return res.status(400).send({ msg: "Username required" });
+    if (!username) return res.status(400).send({ msg: 'Username required' })
     const newUsername = await findOneAndUpdate({ _id: req.user }, { username: username }, { new: true })
     return res.status(200).json(newUsername)
 })

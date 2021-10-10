@@ -4,23 +4,15 @@ const jwt = require('jsonwebtoken')
 const checkAuth = require('../Middleware/CheckAuth')
 const user = require('../Database/Schema/User')
 const genKey = require('../Utils/GenKey')
+const { validateNewUser, validateLoginForm } = require('../Utils/Validates')
 
 router.post('/register', async (req, res) => {
     try {
-        let { username, email, password } = req.body
-        let emailRegex =
-            /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-        let passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*d)[a-zA-Zd]{8,}$/
+        const { username, email, password } = req.body
 
         // validate
-        if (!username || !email || !password) return res.status(400).json({ msg: 'Not all fields have been entered.' })
-        if (emailRegex.test(email)) {
-            return res.status(400).json({ msg: 'Enter a correct email' })
-        }
-        if (passwordRegex.test(password))
-            return res.status(400).json({
-                msg: 'Minimum eight characters, at least one uppercase letter, one lowercase letter and one number'
-            })
+        const { error } = validateNewUser(req.body)
+        if (error) return res.status(400).json({ msg: error.details[0].message })
 
         const existingUser = await user.findOne({ email: email })
         if (existingUser) return res.status(400).json({ msg: 'An account with this email already exists.' })
@@ -40,6 +32,7 @@ router.post('/register', async (req, res) => {
         res.json(savedUser)
     } catch (err) {
         res.status(500).json({ error: err.message })
+        console.log(err.message)
     }
 })
 
@@ -48,12 +41,13 @@ router.post('/login', async (req, res) => {
         const { email, password } = req.body
 
         // validate
-        if (!email || !password) return res.status(400).json({ msg: 'Not all fields have been entered.' })
+        const { error } = validateLoginForm(req.body)
+        if (error) return res.status(400).json({ msg: error.details[0].message })
 
         const userDoc = await user.findOne({ email: email })
         if (!userDoc) return res.status(400).json({ msg: 'No account with this email has been registered.' })
 
-        const isMatch = await bcrypt.compare(password, user.password)
+        const isMatch = await bcrypt.compare(password, userDoc.password)
         if (!isMatch) return res.status(400).json({ msg: 'Invalid credentials.' })
 
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET)
@@ -68,6 +62,7 @@ router.post('/login', async (req, res) => {
         })
     } catch (err) {
         res.status(500).json({ error: err.message })
+        console.log(err)
     }
 })
 
