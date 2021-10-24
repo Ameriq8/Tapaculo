@@ -1,0 +1,28 @@
+{
+    "env": {
+        "browser": true,
+        "es6": true
+    },
+    "parserOptions": {
+        "sourceType": "module"
+    },
+    "extends": ["eslint:recommended", "plugin:prettier/recommended"],
+    "plugins": ["prettier"],
+    "rules": {
+        "prettier/prettier": [
+            "error",
+            {
+                "tabWidth": 4,
+                "printWidth": 150,
+                "singleQuote": true,
+                "semi": false,
+                "quoteProps": "as-needed",
+                "trailingComma": "none",
+                "endOfLine": "lf",
+                "arrowParens": "avoid"
+            }
+        ],
+        "quotes": ["error", "single"],
+        "semi": ["error", "never"]
+    }
+}

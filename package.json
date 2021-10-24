@@ -1,0 +1,57 @@
+{
+  "name": "backend-base",
+  "author": "Ameriq8",
+  "version": "1.0.0",
+  "description": "Simple backend base",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node ./dist/src",
+    "start:dev": "nodemon --exec ts-node ./src/index.ts -e ts",
+    "build": "tsc",
+    "lint:fix": "eslint --fix ./src/**/*.ts",
+    "prettier": "prettier --write src/**/*.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ameriq8/backend-base.git"
+  },
+  "keywords": [
+    "backend",
+    "express",
+    "mongodb",
+    "mongoose"
+  ],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ameriq8/backend-base/issues"
+  },
+  "homepage": "https://github.com/Ameriq8/backend-base#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "env-var": "^7.0.1",
+    "express": "^4.17.1",
+    "helmet": "^4.6.0",
+    "joi": "^17.4.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.0.11",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
+    "@types/chalk": "^2.2.0",
+    "@types/cookie-parser": "^1.4.2",
+    "@types/cors": "^2.8.12",
+    "@types/express": "^4.17.13",
+    "@types/helmet": "^4.0.0",
+    "@types/joi": "^17.2.3",
+    "@types/jsonwebtoken": "^8.5.5",
+    "@types/mongoose": "^5.11.97",
+    "eslint": "^8.0.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "prettier": "^2.4.1"
+  }
+}
