@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import config from '../config';
-import { getUserById } from '../database/methods';
+// import { getUserById } from '../database/methods';
 
 export function generateAccessToken(user) {
     return jwt.sign(
@@ -41,7 +41,7 @@ export function generateNewAccessToken(req, res) {
             res.cookie('accessToken', accessToken, {
                 sameSite: 'strict',
                 expires: new Date(new Date().getTime() + 900000),
-                httpOnly: true /*secure: true*/
+                httpOnly: true
             });
 
             return res.sendStatus(201);

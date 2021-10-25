@@ -15,7 +15,6 @@
     "noUnusedParameters": false,
     "sourceMap": false,
     "strict": false,
-    "esModuleInterop": true,
     "lib": ["dom", "es6"],
     "moduleResolution": "node",
     "typeRoots" : ["./src/@types", "./node_modules/@types"]

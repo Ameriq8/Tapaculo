@@ -1,4 +1,4 @@
-import express, { Application, Response, Request } from 'express';
+import express, { Application } from 'express';
 import reload from 'reload';
 import morgan from "morgan"
 import helmet from "helmet"
@@ -10,6 +10,7 @@ class Server {
   app: Application;
   constructor() {
     this.app = express();
+    this.app.use(express.json())
     this.app.use(helmet())
     this.app.use(morgan('dev'))
     this.app.use(cookieParser())

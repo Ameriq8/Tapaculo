@@ -1,7 +1,6 @@
 import { BaseRoute } from '../structures/baseRouter';
 import { Application, Request, Response } from 'express';
 import bcrypt from 'bcrypt';
-import { userModel } from '../database/schema';
 import { getUserByEmail, getUserByUsername, createNewUser } from '../database/methods';
 import { generateAccessToken, generateRefreshToken, generateNewAccessToken } from '../utils/auth';
 import { validateRegister, validateLogin } from '../utils/validates';
@@ -53,7 +52,7 @@ export class Auth extends BaseRoute {
         });
 
         this.router.post('/login', async (req: Request, res: Response) => {
-            const { error } = validateRegister(req.body);
+            const { error } = validateLogin(req.body);
             if (error) return res.status(400).send(error.details[0].message);
 
             const user = await getUserByEmail(req.body.email)
